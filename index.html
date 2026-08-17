@@ -1,1 +1,859 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>UZI1890 | Dijital Merkez</title>
 
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#01050b;color:#eaf4ff}
+body{
+background:
+radial-gradient(circle at 50% 20%,rgba(0,125,255,.14),transparent 35%),
+radial-gradient(circle at 50% 100%,rgba(0,80,255,.08),transparent 45%),
+#01050b;
+overflow-x:hidden
+}
+
+:root{
+--blue:#008cff;
+--cyan:#00c8ff;
+--dark:#020711;
+--panel:#050b15;
+--panel2:#07111e;
+--line:rgba(0,153,255,.25);
+--text:#edf7ff;
+--muted:#8194aa;
+}
+
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:#02060c}
+::-webkit-scrollbar-thumb{background:#075c9c;border-radius:10px}
+
+.app{
+width:100%;
+max-width:1500px;
+margin:auto;
+min-height:100vh;
+display:grid;
+grid-template-columns:220px minmax(500px,1fr) 220px;
+gap:12px;
+padding:14px
+}
+
+/* SOL MENÜ */
+.left{
+background:linear-gradient(180deg,#030914,#01050b);
+border:1px solid rgba(0,140,255,.45);
+border-radius:18px;
+box-shadow:0 0 25px rgba(0,111,255,.15),inset 0 0 25px rgba(0,100,255,.04);
+padding:15px;
+display:flex;
+flex-direction:column;
+min-height:calc(100vh - 28px);
+position:sticky;
+top:14px
+}
+
+.logo{
+height:190px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+border-bottom:1px solid var(--line);
+margin-bottom:14px
+}
+
+.logo-symbol{
+width:80px;
+height:80px;
+border:3px solid #00aaff;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:39px;
+color:#25c8ff;
+text-shadow:0 0 15px #008cff;
+box-shadow:0 0 15px #008cff,0 0 35px rgba(0,128,255,.45);
+transform:rotate(45deg)
+}
+
+.logo-symbol span{transform:rotate(-45deg)}
+
+.logo b{
+font-size:30px;
+letter-spacing:2px;
+margin-top:15px;
+color:#40cfff;
+text-shadow:0 0 12px #008cff
+}
+
+.menu-title{
+font-size:11px;
+color:#75899f;
+letter-spacing:1px;
+margin:8px 5px
+}
+
+.nav{
+display:flex;
+flex-direction:column;
+gap:5px
+}
+
+.nav a{
+color:#b7c7d8;
+text-decoration:none;
+padding:12px 11px;
+border-radius:11px;
+display:flex;
+align-items:center;
+gap:12px;
+font-size:14px;
+transition:.2s;
+border:1px solid transparent
+}
+
+.nav a:hover,
+.nav a.active{
+color:white;
+background:linear-gradient(90deg,rgba(0,111,255,.25),rgba(0,111,255,.04));
+border-color:rgba(0,145,255,.2);
+box-shadow:inset 0 0 18px rgba(0,120,255,.08),0 0 12px rgba(0,120,255,.08)
+}
+
+.icon{
+width:24px;
+font-size:19px;
+text-align:center;
+color:#8eb7d9
+}
+
+.nav a.active .icon{color:#00aaff}
+
+.badge{
+margin-left:auto;
+background:#075ca5;
+color:#fff;
+font-size:10px;
+padding:3px 7px;
+border-radius:20px
+}
+
+.bottom-brand{
+margin-top:auto;
+border:1px solid rgba(0,145,255,.4);
+border-radius:12px;
+padding:18px 10px;
+text-align:center;
+background:linear-gradient(180deg,rgba(0,80,160,.08),rgba(0,20,40,.1));
+box-shadow:0 0 18px rgba(0,115,255,.1)
+}
+
+.bottom-brand strong{
+font-size:18px;
+color:#24bdff;
+text-shadow:0 0 10px #008cff
+}
+
+.bottom-brand small{
+display:block;
+margin-top:5px;
+color:#7d91a6
+}
+
+/* ORTA */
+.center{
+min-width:0;
+border:1px solid rgba(0,120,255,.25);
+border-radius:17px;
+background:rgba(1,6,13,.78);
+box-shadow:0 0 25px rgba(0,100,255,.06);
+overflow:hidden
+}
+
+.topbar{
+height:76px;
+display:flex;
+align-items:center;
+gap:18px;
+padding:0 20px;
+border-bottom:1px solid rgba(0,120,255,.16)
+}
+
+.hamb{
+font-size:27px;
+color:#22baff
+}
+
+.brand{
+font-size:20px;
+font-weight:bold;
+color:#24baff;
+text-shadow:0 0 12px #007dff
+}
+
+.search{
+height:42px;
+flex:1;
+max-width:470px;
+margin-left:25px;
+border:1px solid rgba(100,140,170,.3);
+background:#02070d;
+border-radius:24px;
+display:flex;
+align-items:center;
+padding:0 15px;
+color:#7d8fa2
+}
+
+.search input{
+width:100%;
+background:none;
+border:0;
+outline:0;
+color:white;
+font-size:14px
+}
+
+.top-icons{
+margin-left:auto;
+display:flex;
+align-items:center;
+gap:18px;
+color:#c4d2df;
+font-size:21px
+}
+
+.profile-mini{
+display:flex;
+align-items:center;
+gap:9px;
+font-size:12px
+}
+
+.avatar{
+width:39px;
+height:39px;
+border:2px solid #66839d;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+color:#d9edff
+}
+
+/* HERO */
+.hero{
+margin:0 12px 14px;
+height:410px;
+border:1px solid rgba(0,139,255,.3);
+border-radius:14px;
+overflow:hidden;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+background:
+linear-gradient(180deg,rgba(0,5,12,.12),rgba(0,5,12,.85)),
+radial-gradient(circle at 50% 38%,rgba(0,174,255,.4),transparent 18%),
+linear-gradient(120deg,#030c18,#001326 50%,#02070e)
+}
+
+.hero:before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(90deg,transparent,rgba(0,110,255,.08),transparent),
+repeating-linear-gradient(90deg,transparent 0 70px,rgba(0,120,255,.025) 71px 72px)
+}
+
+.hero-inner{
+position:relative;
+z-index:2;
+text-align:center
+}
+
+.hero-symbol{
+width:130px;
+height:130px;
+border:4px solid #19baff;
+border-radius:50%;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:60px;
+color:#2ccaff;
+text-shadow:0 0 25px #008cff;
+box-shadow:0 0 20px #008cff,0 0 60px rgba(0,140,255,.35);
+transform:rotate(45deg)
+}
+
+.hero-symbol span{transform:rotate(-45deg)}
+
+.hero h1{
+font-size:74px;
+margin:20px 0 0;
+letter-spacing:6px;
+color:#16baff;
+text-shadow:0 0 15px #008cff,0 0 35px rgba(0,140,255,.65)
+}
+
+.hero p{
+margin:4px 0;
+font-size:17px;
+color:#32c5ff
+}
+
+/* KARTLAR */
+.cards{
+padding:0 12px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:13px
+}
+
+.card{
+min-height:150px;
+padding:20px;
+border:1px solid rgba(0,130,255,.25);
+border-radius:14px;
+background:
+linear-gradient(145deg,rgba(5,18,32,.92),rgba(2,8,16,.92));
+position:relative;
+overflow:hidden;
+transition:.25s
+}
+
+.card:hover{
+transform:translateY(-2px);
+border-color:rgba(0,174,255,.65);
+box-shadow:0 0 25px rgba(0,120,255,.13)
+}
+
+.card-icon{
+font-size:40px;
+margin-bottom:12px;
+text-shadow:0 0 14px #008cff
+}
+
+.card h3{
+margin:0 0 8px;
+font-size:16px;
+letter-spacing:.5px
+}
+
+.card p{
+margin:0;
+color:#8194aa;
+font-size:12px;
+line-height:1.5
+}
+
+.go{
+display:inline-block;
+margin-top:14px;
+padding:7px 14px;
+border:1px solid rgba(0,130,255,.35);
+border-radius:20px;
+color:#23baff;
+font-size:12px;
+text-decoration:none
+}
+
+.wide{
+grid-column:span 3;
+min-height:155px;
+background:
+linear-gradient(90deg,rgba(2,12,23,.97),rgba(3,20,35,.75)),
+radial-gradient(circle at 85% 50%,rgba(0,130,255,.2),transparent 30%)
+}
+
+.wide-content{
+max-width:70%
+}
+
+/* FORUM */
+.forum{
+margin:14px 12px;
+padding:22px;
+border:1px solid rgba(0,130,255,.25);
+border-radius:14px;
+background:#030a13
+}
+
+.forum h2{
+margin:0 0 7px;
+font-size:20px
+}
+
+.forum p{
+color:#8295a9;
+font-size:13px
+}
+
+.stats{
+display:flex;
+gap:40px;
+margin-top:20px
+}
+
+.stat small{
+display:block;
+color:#77899c
+}
+
+.stat b{
+color:#16baff;
+font-size:18px
+}
+
+/* SAĞ */
+.right{
+background:linear-gradient(180deg,#030914,#01050b);
+border:1px solid rgba(0,140,255,.45);
+border-radius:18px;
+box-shadow:0 0 25px rgba(0,111,255,.15);
+padding:15px;
+min-height:calc(100vh - 28px);
+position:sticky;
+top:14px
+}
+
+.right-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:13px;
+font-weight:bold;
+margin-bottom:12px
+}
+
+.close{
+width:34px;
+height:34px;
+display:flex;
+align-items:center;
+justify-content:center;
+border:1px solid rgba(0,130,255,.3);
+border-radius:9px;
+color:#30bdff;
+font-size:20px
+}
+
+.right-section{
+border-top:1px solid rgba(0,130,255,.17);
+padding-top:14px;
+margin-top:12px
+}
+
+.right-section h4{
+font-size:11px;
+color:#8498ac;
+margin:0 0 8px
+}
+
+.quick{
+display:flex;
+flex-direction:column;
+gap:7px
+}
+
+.quick a{
+text-decoration:none;
+color:#b9c8d6;
+font-size:12px;
+padding:9px;
+border-radius:9px;
+background:rgba(0,90,160,.08);
+border:1px solid rgba(0,130,255,.1)
+}
+
+.quick a:hover{
+color:#fff;
+border-color:rgba(0,160,255,.4)
+}
+
+.right-logo{
+margin-top:30px;
+text-align:center;
+color:#18baff
+}
+
+.right-logo .mini{
+font-size:42px;
+text-shadow:0 0 15px #008cff
+}
+
+.right-logo b{
+display:block;
+font-size:25px;
+text-shadow:0 0 10px #008cff
+}
+
+.socials{
+display:flex;
+justify-content:center;
+gap:14px;
+margin-top:15px;
+color:#91aac0
+}
+
+/* ALT */
+footer{
+text-align:center;
+color:#596b7e;
+font-size:11px;
+padding:15px
+}
+
+/* MOBİL */
+@media(max-width:1050px){
+.app{
+grid-template-columns:190px minmax(0,1fr);
+}
+.right{display:none}
+.cards{grid-template-columns:repeat(2,1fr)}
+.wide{grid-column:span 2}
+}
+
+@media(max-width:720px){
+.app{
+display:block;
+padding:7px
+}
+
+.left{
+display:none
+}
+
+.center{
+border-radius:12px
+}
+
+.topbar{
+height:65px;
+padding:0 12px;
+gap:10px
+}
+
+.brand{font-size:17px}
+
+.search{
+margin-left:5px;
+height:38px
+}
+
+.top-icons .profile-mini{
+display:none
+}
+
+.hero{
+height:330px;
+margin:8px;
+}
+
+.hero-symbol{
+width:100px;
+height:100px;
+font-size:46px
+}
+
+.hero h1{
+font-size:54px
+}
+
+.cards{
+grid-template-columns:1fr;
+padding:0 8px
+}
+
+.wide{
+grid-column:span 1
+}
+
+.wide-content{
+max-width:100%
+}
+
+.forum{
+margin:10px 8px
+}
+
+.stats{
+gap:20px
+}
+}
+
+@media(min-width:1500px){
+.app{max-width:1550px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SOL MENÜ -->
+<aside class="left">
+
+<div class="logo">
+<div class="logo-symbol"><span>✦</span></div>
+<b>1890</b>
+</div>
+
+<div class="menu-title">MENÜ</div>
+
+<nav class="nav">
+<a href="#" class="active"><span class="icon">⌂</span>Ana Sayfa</a>
+<a href="#"><span class="icon">▧</span>Galeri</a>
+<a href="#"><span class="icon">◎</span>Instagram</a>
+<a href="#"><span class="icon">◔</span>WhatsApp</a>
+<a href="#"><span class="icon">f</span>Facebook</a>
+<a href="#"><span class="icon">🎮</span>WePlay</a>
+<a href="#"><span class="icon">✧</span>Haza</a>
+<a href="#"><span class="icon">➤</span>Telegram İhbar</a>
+<a href="#"><span class="icon">▣</span>Forum</a>
+</nav>
+
+<div class="menu-title" style="margin-top:18px">HESABIM</div>
+
+<nav class="nav">
+<a href="#"><span class="icon">♙</span>Profil</a>
+<a href="#"><span class="icon">✉</span>Mesajlar <span class="badge">3</span></a>
+<a href="#"><span class="icon">⚙</span>Ayarlar</a>
+<a href="#"><span class="icon">⇥</span>Çıkış Yap</a>
+</nav>
+
+<div class="bottom-brand">
+<strong>♔</strong>
+<div><strong>uzi1890</strong></div>
+<small>SUNAR</small>
+</div>
+
+</aside>
+
+
+<!-- ANA -->
+<main class="center">
+
+<header class="topbar">
+<div class="hamb">☰</div>
+<div class="brand">UZI1890</div>
+
+<div class="search">
+<input id="search" placeholder="Ara..." onkeyup="searchCards()">
+<span>⌕</span>
+</div>
+
+<div class="top-icons">
+<span>♧</span>
+<div class="profile-mini">
+<div class="avatar">♙</div>
+<div>uzi1890<br><small style="color:#75899c">Hoş geldin!</small></div>
+</div>
+</div>
+</header>
+
+
+<section class="hero">
+
+<div class="hero-inner">
+
+<div class="hero-symbol"><span>✦</span></div>
+
+<h1>1890</h1>
+
+<p>HOŞ GELDİN, uzi1890</p>
+
+</div>
+
+</section>
+
+
+<section class="cards" id="cards">
+
+<article class="card">
+<div class="card-icon">▧</div>
+<h3>GALERİ</h3>
+<p>Fotoğraflarımızı keşfedin.</p>
+<a class="go" href="#">Git →</a>
+</article>
+
+<article class="card">
+<div class="card-icon">◎</div>
+<h3>INSTAGRAM</h3>
+<p>Instagram paylaşımlarımız.</p>
+<a class="go" href="#">Git →</a>
+</article>
+
+<article class="card">
+<div class="card-icon">◔</div>
+<h3>WHATSAPP</h3>
+<p>WhatsApp ile iletişime geç.</p>
+<a class="go" href="#">Git →</a>
+</article>
+
+<article class="card">
+<div class="card-icon">f</div>
+<h3>FACEBOOK</h3>
+<p>Facebook sayfamızı ziyaret et.</p>
+<a class="go" href="#">Git →</a>
+</article>
+
+<article class="card">
+<div class="card-icon">🎮</div>
+<h3>WEPLAY</h3>
+<p>WePlay oyun dünyası.</p>
+<a class="go" href="#">Git →</a>
+</article>
+
+<article class="card">
+<div class="card-icon">✧</div>
+<h3>HAZA</h3>
+<p>Haza dünyasına hoş geldin.</p>
+<a class="go" href="#">Git →</a>
+</article>
+
+<article class="card wide">
+<div class="wide-content">
+<div class="card-icon">➤</div>
+<h3>TELEGRAM İHBAR</h3>
+<p>Görüş ve bildirimlerinizi bize bildirin.</p>
+<a class="go" href="#">Git →</a>
+</div>
+</article>
+
+</section>
+
+
+<section class="forum">
+
+<h2>💬 FORUM</h2>
+
+<p>Topluluk ile etkileşime geç, konuları tartış.</p>
+
+<div class="stats">
+
+<div class="stat">
+<small>Konular</small>
+<b>128</b>
+</div>
+
+<div class="stat">
+<small>Mesajlar</small>
+<b>1.896</b>
+</div>
+
+<div class="stat">
+<small>Üyeler</small>
+<b>2.451</b>
+</div>
+
+<a class="go" href="#">Foruma Git →</a>
+
+</div>
+
+</section>
+
+<footer>
+© 1890 UZI — Tüm hakları saklıdır.
+</footer>
+
+</main>
+
+
+<!-- SAĞ MENÜ -->
+<aside class="right">
+
+<div class="right-title">
+<span>MENÜ</span>
+<div class="close">×</div>
+</div>
+
+<nav class="nav">
+
+<a href="#" class="active"><span class="icon">⌂</span>Ana Sayfa</a>
+<a href="#"><span class="icon">▧</span>Galeri</a>
+<a href="#"><span class="icon">◎</span>Instagram</a>
+<a href="#"><span class="icon">◔</span>WhatsApp</a>
+<a href="#"><span class="icon">f</span>Facebook</a>
+<a href="#"><span class="icon">🎮</span>WePlay</a>
+<a href="#"><span class="icon">✧</span>Haza</a>
+<a href="#"><span class="icon">➤</span>Telegram İhbar</a>
+<a href="#"><span class="icon">▣</span>Forum</a>
+
+</nav>
+
+<div class="right-section">
+
+<h4>HESABIM</h4>
+
+<nav class="nav">
+<a href="#"><span class="icon">♙</span>Profil</a>
+<a href="#"><span class="icon">✉</span>Mesajlar <span class="badge">3</span></a>
+<a href="#"><span class="icon">⚙</span>Ayarlar</a>
+<a href="#"><span class="icon">⇥</span>Çıkış Yap</a>
+</nav>
+
+</div>
+
+<div class="right-section">
+
+<h4>HIZLI ERİŞİM</h4>
+
+<div class="quick">
+<a href="#">▧ &nbsp; Galeri</a>
+<a href="#">◎ &nbsp; Instagram</a>
+<a href="#">◔ &nbsp; WhatsApp</a>
+<a href="#">f &nbsp; Facebook</a>
+<a href="#">🎮 &nbsp; WePlay</a>
+<a href="#">✧ &nbsp; Haza</a>
+</div>
+
+</div>
+
+<div class="right-logo">
+<div class="mini">✦</div>
+<b>1890</b>
+<div style="font-size:11px;color:#72869b;margin-top:4px">uzi1890 sunar</div>
+
+<div class="socials">
+<span>➤</span>
+<span>◎</span>
+<span>▶</span>
+<span>◉</span>
+</div>
+</div>
+
+</aside>
+
+</div>
+
+
+<script>
+function searchCards(){
+const q=document.getElementById("search").value.toLowerCase();
+document.querySelectorAll(".card").forEach(card=>{
+card.style.display=card.innerText.toLowerCase().includes(q)?"":"none";
+});
+}
+
+document.querySelectorAll(".nav a").forEach(a=>{
+a.addEventListener("click",function(e){
+e.preventDefault();
+document.querySelectorAll(".nav a").forEach(x=>x.classList.remove("active"));
+this.classList.add("active");
+});
+});
+</script>
+
+</body>
+  </html>
