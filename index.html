@@ -13,1001 +13,122 @@
 }
 
 :root{
-  --bg:#01050b;
-  --panel:#030a14;
-  --panel2:#061120;
+  --bg:#01050d;
+  --panel:#050c17;
+  --panel2:#071221;
   --blue:#008cff;
   --cyan:#00d9ff;
-  --text:#f4f8ff;
-  --muted:#91a3bd;
-  --border:rgba(0,140,255,.35);
-  --glow:0 0 20px rgba(0,140,255,.35);
-}
-
-html,body{
-  min-height:100%;
-  background:#01050b;
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+  --text:#eef7ff;
+  --muted:#8798ae;
+  --border:rgba(0,140,255,.30);
 }
 
 body{
   background:
-    radial-gradient(circle at 50% 10%,rgba(0,105,255,.13),transparent 35%),
-    radial-gradient(circle at 50% 100%,rgba(0,210,255,.08),transparent 40%),
-    #01050b;
+    radial-gradient(circle at 50% 10%,rgba(0,120,255,.13),transparent 35%),
+    radial-gradient(circle at 50% 100%,rgba(0,210,255,.07),transparent 40%),
+    #01050d;
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
   overflow-x:hidden;
+}
+
+button{
+  font:inherit;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
 }
 
 /* ANA YAPI */
 
 .app{
-  width:100%;
-  min-height:100vh;
+  width:min(1450px,100%);
+  margin:auto;
   display:grid;
-  grid-template-columns:220px minmax(500px,1fr) 220px;
+  grid-template-columns:220px 1fr 220px;
   gap:12px;
+  min-height:100vh;
   padding:14px;
 }
 
-/* MENÜLER */
+/* SOL MENÜ */
 
-.sidebar,
-.rightbar,
-.main{
+.sidebar{
   border:1px solid var(--border);
-  background:
-    linear-gradient(180deg,rgba(4,13,25,.96),rgba(1,6,13,.98));
-  box-shadow:var(--glow);
   border-radius:18px;
-}
-
-.sidebar,
-.rightbar{
-  min-height:calc(100vh - 28px);
-  position:sticky;
-  top:14px;
+  background:rgba(3,10,19,.94);
+  box-shadow:
+    0 0 20px rgba(0,140,255,.13),
+    inset 0 0 30px rgba(0,100,255,.025);
   padding:18px 12px;
+  display:flex;
+  flex-direction:column;
 }
 
 .logo{
-  height:190px;
-  border:1px solid rgba(0,140,255,.35);
-  border-radius:15px;
+  text-align:center;
+  padding:15px 5px 22px;
+  color:var(--cyan);
+  font-size:26px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-shadow:0 0 15px rgba(0,200,255,.8);
+}
+
+.menu{
   display:flex;
   flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:18px;
-  background:
-    radial-gradient(circle,rgba(0,140,255,.18),transparent 65%);
+  gap:5px;
 }
 
-.logo-symbol{
-  width:75px;
-  height:75px;
-  border:3px solid var(--cyan);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:32px;
-  color:#fff;
-  box-shadow:
-    0 0 12px var(--blue),
-    0 0 35px rgba(0,140,255,.7);
-  margin-bottom:8px;
-}
-
-.logo-number{
-  font-size:28px;
-  color:#53caff;
-  text-shadow:0 0 12px #008cff;
-  font-weight:bold;
-}
-
-.logo-user{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
-}
-
-.menu-title{
-  font-size:12px;
-  color:#c9d5e5;
-  margin:15px 8px 8px;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-}
-
-.menu-item{
-  width:100%;
+.menu a{
+  padding:13px 12px;
+  border-radius:10px;
+  color:#b9c9dc;
   display:flex;
   align-items:center;
   gap:12px;
-  color:#d6e0ed;
-  text-decoration:none;
-  padding:12px 10px;
-  border-radius:11px;
-  margin:4px 0;
-  font-size:14px;
   transition:.2s;
   cursor:pointer;
 }
 
-.menu-item:hover{
-  color:#fff;
-  background:rgba(0,140,255,.13);
-  box-shadow:inset 0 0 15px rgba(0,140,255,.1);
-}
-
-.menu-item.active{
-  background:linear-gradient(90deg,rgba(0,130,255,.28),rgba(0,90,180,.12));
-  color:#fff;
-  box-shadow:
-    0 0 15px rgba(0,140,255,.18),
-    inset 0 0 12px rgba(0,140,255,.08);
+.menu a:hover,
+.menu a.active{
+  color:white;
+  background:linear-gradient(90deg,rgba(0,130,255,.22),rgba(0,80,180,.05));
+  box-shadow:inset 3px 0 var(--blue),0 0 15px rgba(0,120,255,.08);
 }
 
 .icon{
-  width:23px;
+  width:25px;
   text-align:center;
-  font-size:19px;
+  font-size:18px;
 }
 
-.divider{
+.separator{
   height:1px;
-  background:rgba(120,160,200,.18);
-  margin:16px 5px;
+  background:rgba(130,160,190,.13);
+  margin:14px 5px;
 }
 
-.bottom-logo{
-  margin-top:35px;
-  padding:18px 5px;
-  border:1px solid rgba(0,140,255,.25);
-  border-radius:12px;
+.sidebar-bottom{
+  margin-top:auto;
+  padding:16px 8px 4px;
   text-align:center;
-}
-
-.bottom-logo strong{
-  color:#52caff;
-  font-size:17px;
-  text-shadow:0 0 10px #008cff;
-}
-
-.bottom-logo span{
-  display:block;
-  color:#71859f;
-  font-size:11px;
-  margin-top:4px;
-}
-
-/* ANA ALAN */
-
-.main{
-  min-height:calc(100vh - 28px);
-  overflow:hidden;
-}
-
-.topbar{
-  height:76px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  padding:12px 18px;
-  border-bottom:1px solid rgba(0,140,255,.15);
-}
-
-.hamburger{
-  width:40px;
-  height:40px;
-  border:0;
-  background:transparent;
-  color:#24aaff;
-  font-size:27px;
-  cursor:pointer;
-}
-
-.brand{
-  font-size:20px;
-  font-weight:bold;
-  color:#39baff;
-  text-shadow:0 0 12px rgba(0,140,255,.7);
-}
-
-.search{
-  flex:1;
-  max-width:400px;
-  height:42px;
-  margin:auto;
-  border:1px solid rgba(130,160,200,.28);
-  background:rgba(0,0,0,.25);
-  border-radius:25px;
-  display:flex;
-  align-items:center;
-  padding:0 15px;
-}
-
-.search input{
-  width:100%;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:white;
-  font-size:14px;
-}
-
-.search input::placeholder{
-  color:#74869c;
-}
-
-.top-icon{
-  font-size:22px;
-  color:#dce8f6;
-  cursor:pointer;
-}
-
-.user{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:13px;
-}
-
-.avatar{
-  width:40px;
-  height:40px;
-  border:2px solid #5bcaff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#65d2ff;
-  box-shadow:0 0 12px rgba(0,140,255,.35);
-}
-
-/* HERO */
-
-.content{
-  padding:12px;
-}
-
-.hero{
-  height:420px;
-  border:1px solid rgba(0,140,255,.32);
+  border:1px solid rgba(0,150,255,.22);
   border-radius:14px;
-  overflow:hidden;
-  position:relative;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0,0,0,.72),
-      rgba(0,10,25,.25),
-      rgba(0,0,0,.72)
-    ),
-    radial-gradient(circle at 50% 45%,
-      rgba(0,150,255,.35),
-      transparent 28%),
-    linear-gradient(135deg,#020817,#03182c 45%,#01050b);
+  background:rgba(0,80,180,.05);
 }
 
-.hero:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg,transparent 45%,rgba(0,0,0,.7)),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 65px,
-      rgba(0,120,255,.04) 66px 68px
-    );
+.crown{
+  font-size:28px;
+  color:#55cfff;
+  text-shadow:0 0 15px #008cff;
 }
 
-.hero-content{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-
-.hero-symbol{
-  width:145px;
-  height:145px;
-  border:5px solid #1baeff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:62px;
-  color:white;
-  text-shadow:0 0 15px #00aaff;
-  box-shadow:
-    0 0 15px #008cff,
-    0 0 50px rgba(0,140,255,.7),
-    inset 0 0 25px rgba(0,140,255,.35);
-  margin-bottom:15px;
-}
-
-.hero h1{
-  font-size:72px;
-  color:#42c7ff;
-  text-shadow:
-    0 0 10px #008cff,
-    0 0 30px rgba(0,140,255,.75);
-}
-
-.hero p{
-  margin-top:8px;
-  color:#29baff;
-  font-size:16px;
-  font-weight:bold;
-}
-
-/* KARTLAR */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:12px;
-}
-
-.card{
-  min-height:155px;
-  border:1px solid rgba(0,140,255,.25);
-  background:
-    linear-gradient(145deg,rgba(5,18,34,.92),rgba(1,8,16,.96));
-  border-radius:15px;
-  padding:20px;
-  transition:.25s;
-}
-
-.card:hover{
-  transform:translateY(-3px);
-  border-color:rgba(0,180,255,.65);
-  box-shadow:
-    0 0 25px rgba(0,140,255,.2),
-    inset 0 0 20px rgba(0,140,255,.04);
-}
-
-.card-icon{
-  width:50px;
-  height:50px;
-  border-radius:13px;
-  border:1px solid rgba(0,160,255,.4);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-  color:#35c1ff;
-  margin-bottom:13px;
-  box-shadow:0 0 15px rgba(0,140,255,.18);
-}
-
-.card h3{
-  font-size:15px;
-  margin-bottom:8px;
-}
-
-.card p{
-  color:#8295ad;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.card button{
-  margin-top:12px;
-  border:1px solid rgba(0,140,255,.4);
-  color:#28baff;
-  background:#03101e;
-  padding:7px 15px;
-  border-radius:20px;
-  cursor:pointer;
-}
-
-/* GENİŞ KART */
-
-.wide{
-  grid-column:1 / -1;
-  min-height:150px;
-  display:flex;
-  align-items:center;
-  gap:25px;
-}
-
-.wide .card-icon{
-  width:70px;
-  height:70px;
-  flex-shrink:0;
-}
-
-.stats{
-  display:flex;
-  gap:35px;
-  margin-top:15px;
-}
-
-.stat span{
-  display:block;
-  color:#768aa2;
-  font-size:11px;
-}
-
-.stat strong{
-  color:#2ebaff;
-  font-size:17px;
-}
-
-/* SAĞ MENÜ */
-
-.rightbar{
-  padding:18px 12px;
-}
-
-.rightbar .menu-title{
-  margin-top:0;
-}
-
-.quick{
-  padding:10px;
-  border:1px solid rgba(0,140,255,.16);
-  border-radius:10px;
-  margin:6px 0;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:12px;
-  color:#cbd8e8;
-  cursor:pointer;
-}
-
-.quick:hover{
-  border-color:#008cff;
-  box-shadow:0 0 12px rgba(0,140,255,.18);
-}
-
-.footer{
-  text-align:center;
-  color:#65788f;
-  font-size:11px;
-  padding:18px;
-}
-
-/* MOBİL */
-
-.mobile-menu{
-  display:none;
-}
-
-@media(max-width:1000px){
-
-  .app{
-    grid-template-columns:180px minmax(450px,1fr);
-  }
-
-  .rightbar{
-    display:none;
-  }
-}
-
-@media(max-width:700px){
-
-  .app{
-    display:block;
-    padding:5px;
-  }
-
-  .sidebar{
-    display:none;
-  }
-
-  .main{
-    min-height:100vh;
-    border-radius:10px;
-  }
-
-  .topbar{
-    height:65px;
-    padding:8px;
-    gap:8px;
-  }
-
-  .brand{
-    font-size:17px;
-  }
-
-  .search{
-    max-width:none;
-    height:37px;
-  }
-
-  .user{
-    display:none;
-  }
-
-  .content{
-    padding:8px;
-  }
-
-  .hero{
-    height:310px;
-  }
-
-  .hero-symbol{
-    width:100px;
-    height:100px;
-    font-size:42px;
-  }
-
-  .hero h1{
-    font-size:48px;
-  }
-
-  .hero p{
-    font-size:13px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .wide{
-    grid-column:auto;
-  }
-
-  .stats{
-    gap:15px;
-    flex-wrap:wrap;
-  }
-}
-
-/* PANEL */
-
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.72);
-  z-index:20;
-}
-
-.popup{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:min(420px,90%);
-  padding:25px;
-  border:1px solid #008cff;
-  background:#030b16;
-  border-radius:18px;
-  box-shadow:0 0 40px rgba(0,140,255,.35);
-}
-
-.popup h2{
-  color:#32bfff;
-  margin-bottom:12px;
-}
-
-.close{
-  float:right;
-  background:transparent;
-  border:0;
-  color:#fff;
-  font-size:22px;
-  cursor:pointer;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="app">
-
-<!-- SOL MENÜ -->
-
-<aside class="sidebar">
-
-  <div class="logo">
-    <div class="logo-symbol">✦</div>
-    <div class="logo-number">1890</div>
-    <div class="logo-user">uzi1890</div>
-  </div>
-
-  <div class="menu-title">Menü</div>
-
-  <a class="menu-item active" onclick="openPage('Ana Sayfa')">
-    <span class="icon">⌂</span> Ana Sayfa
-  </a>
-
-  <a class="menu-item" onclick="openPage('Galeri')">
-    <span class="icon">▧</span> Galeri
-  </a>
-
-  <a class="menu-item" onclick="openPage('Instagram')">
-    <span class="icon">◎</span> Instagram
-  </a>
-
-  <a class="menu-item" onclick="openPage('WhatsApp')">
-    <span class="icon">◉</span> WhatsApp
-  </a>
-
-  <a class="menu-item" onclick="openPage('Facebook')">
-    <span class="icon">f</span> Facebook
-  </a>
-
-  <a class="menu-item" onclick="openPage('WePlay')">
-    <span class="icon">♧</span> WePlay
-  </a>
-
-  <a class="menu-item" onclick="openPage('Haza')">
-    <span class="icon">✧</span> Haza
-  </a>
-
-  <a class="menu-item" onclick="openPage('Telegram İhbar')">
-    <span class="icon">➤</span> Telegram İhbar
-  </a>
-
-  <a class="menu-item" onclick="openPage('Forum')">
-    <span class="icon">▱</span> Forum
-  </a>
-
-  <div class="divider"></div>
-
-  <div class="menu-title">Hesabım</div>
-
-  <a class="menu-item" onclick="openPage('Profil')">
-    <span class="icon">♙</span> Profil
-  </a>
-
-  <a class="menu-item" onclick="openPage('Mesajlar')">
-    <span class="icon">✉</span> Mesajlar
-    <b style="margin-left:auto;color:#39baff;">3</b>
-  </a>
-
-  <a class="menu-item" onclick="openPage('Ayarlar')">
-    <span class="icon">⚙</span> Ayarlar
-  </a>
-
-  <a class="menu-item" onclick="openPage('Çıkış')">
-    <span class="icon">⇥</span> Çıkış Yap
-  </a>
-
-  <div class="bottom-logo">
-    <strong>♛<br>uzi1890</strong>
-    <span>SUNAR</span>
-  </div>
-
-</aside>
-
-
-<!-- ANA -->
-
-<main class="main">
-
-  <header class="topbar">
-
-    <button class="hamburger" onclick="toggleMobile()">☰</button>
-
-    <div class="brand">UZI1890</div>
-
-    <div class="search">
-      <input
-        id="search"
-        type="text"
-        placeholder="Ara..."
-        onkeyup="searchCards()"
-      >
-      <span>⌕</span>
-    </div>
-
-    <div class="top-icon" onclick="openPage('Bildirimler')">♧</div>
-
-    <div class="user">
-      <div class="avatar">♙</div>
-      <div>
-        <b>uzi1890</b><br>
-        <small style="color:#71859d">Hoş geldin!</small>
-      </div>
-    </div>
-
-  </header>
-
-
-  <section class="content">
-
-    <!-- HERO -->
-
-    <div class="hero">
-
-      <div class="hero-content">
-
-        <div class="hero-symbol">✦</div>
-
-        <h1>1890</h1>
-
-        <p>HOŞ GELDİN, uzi1890</p>
-
-      </div>
-
-    </div>
-
-
-    <!-- KARTLAR -->
-
-    <div class="grid" id="cards">
-
-      <div class="card searchable">
-        <div class="card-icon">▧</div>
-        <h3>GALERİ</h3>
-        <p>Fotoğraflarımızı keşfedin.</p>
-        <button onclick="openPage('Galeri')">Git →</button>
-      </div>
-
-      <div class="card searchable">
-        <div class="card-icon">◎</div>
-        <h3>INSTAGRAM</h3>
-        <p>Instagram paylaşımlarımız.</p>
-        <button onclick="openPage('Instagram')">Git →</button>
-      </div>
-
-      <div class="card searchable">
-        <div class="card-icon">◉</div>
-        <h3>WHATSAPP</h3>
-        <p>WhatsApp ile iletişime geç.</p>
-        <button onclick="openPage('WhatsApp')">Git →</button>
-      </div>
-
-      <div class="card searchable">
-        <div class="card-icon">f</div>
-        <h3>FACEBOOK</h3>
-        <p>Facebook sayfamızı ziyaret et.</p>
-        <button onclick="openPage('Facebook')">Git →</button>
-      </div>
-
-      <div class="card searchable">
-        <div class="card-icon">♧</div>
-        <h3>WEPLAY</h3>
-        <p>WePlay oyun dünyası.</p>
-        <button onclick="openPage('WePlay')">Git →</button>
-      </div>
-
-      <div class="card searchable">
-        <div class="card-icon">✧</div>
-        <h3>HAZA</h3>
-        <p>Haza dünyasına hoş geldin.</p>
-        <button onclick="openPage('Haza')">Git →</button>
-      </div>
-
-
-      <div class="card wide searchable">
-
-        <div class="card-icon">➤</div>
-
-        <div>
-          <h3>TELEGRAM İHBAR</h3>
-
-          <p>
-            Görüş ve ihbarlarınızı bize bildirin.
-          </p>
-
-          <button onclick="openPage('Telegram İhbar')">
-            Git →
-          </button>
-        </div>
-
-      </div>
-
-
-      <div class="card wide searchable">
-
-        <div class="card-icon">☁</div>
-
-        <div>
-
-          <h3>FORUM</h3>
-
-          <p>
-            Topluluk ile etkileşime geç,
-            konuları tartış.
-          </p>
-
-          <div class="stats">
-
-            <div class="stat">
-              <span>Konular</span>
-              <strong>128</strong>
-            </div>
-
-            <div class="stat">
-              <span>Mesajlar</span>
-              <strong>1.896</strong>
-            </div>
-
-            <div class="stat">
-              <span>Üyeler</span>
-              <strong>2.451</strong>
-            </div>
-
-          </div>
-
-          <button onclick="openPage('Forum')">
-            Foruma Git →
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <div class="footer">
-    © 1890 uzi1890 sunar - Tüm hakları saklıdır.
-  </div>
-
-</main>
-
-
-<!-- SAĞ MENÜ -->
-
-<aside class="rightbar">
-
-  <div class="menu-title">Menü</div>
-
-  <a class="menu-item active" onclick="openPage('Ana Sayfa')">
-    <span class="icon">⌂</span> Ana Sayfa
-  </a>
-
-  <a class="menu-item" onclick="openPage('Galeri')">
-    <span class="icon">▧</span> Galeri
-  </a>
-
-  <a class="menu-item" onclick="openPage('Instagram')">
-    <span class="icon">◎</span> Instagram
-  </a>
-
-  <a class="menu-item" onclick="openPage('WhatsApp')">
-    <span class="icon">◉</span> WhatsApp
-  </a>
-
-  <a class="menu-item" onclick="openPage('Facebook')">
-    <span class="icon">f</span> Facebook
-  </a>
-
-  <a class="menu-item" onclick="openPage('WePlay')">
-    <span class="icon">♧</span> WePlay
-  </a>
-
-  <a class="menu-item" onclick="openPage('Haza')">
-    <span class="icon">✧</span> Haza
-  </a>
-
-  <a class="menu-item" onclick="openPage('Telegram')">
-    <span class="icon">➤</span> Telegram İhbar
-  </a>
-
-  <a class="menu-item" onclick="openPage('Forum')">
-    <span class="icon">▱</span> Forum
-  </a>
-
-  <div class="divider"></div>
-
-  <div class="menu-title">Hesabım</div>
-
-  <a class="menu-item" onclick="openPage('Profil')">
-    <span class="icon">♙</span> Profil
-  </a>
-
-  <a class="menu-item" onclick="openPage('Mesajlar')">
-    <span class="icon">✉</span> Mesajlar
-    <b style="margin-left:auto;color:#39baff">3</b>
-  </a>
-
-  <a class="menu-item" onclick="openPage('Ayarlar')">
-    <span class="icon">⚙</span> Ayarlar
-  </a>
-
-  <a class="menu-item" onclick="openPage('Çıkış')">
-    <span class="icon">⇥</span> Çıkış Yap
-  </a>
-
-  <div class="divider"></div>
-
-  <div class="menu-title">Hızlı Erişim</div>
-
-  <div class="quick" onclick="openPage('Galeri')">▧ Galeri</div>
-  <div class="quick" onclick="openPage('Instagram')">◎ Instagram</div>
-  <div class="quick" onclick="openPage('WhatsApp')">◉ WhatsApp</div>
-  <div class="quick" onclick="openPage('Facebook')">f Facebook</div>
-  <div class="quick" onclick="openPage('WePlay')">♧ WePlay</div>
-  <div class="quick" onclick="openPage('Haza')">✧ Haza</div>
-
-  <div class="bottom-logo">
-    <strong>✦ 1890</strong>
-    <span>uzi1890 sunar</span>
-  </div>
-
-</aside>
-
-</div>
-
-
-<!-- POPUP -->
-
-<div class="overlay" id="overlay">
-
-  <div class="popup">
-
-    <button class="close" onclick="closePage()">×</button>
-
-    <h2 id="popupTitle">1890</h2>
-
-    <p id="popupText" style="color:#91a3bd;line-height:1.6;">
-      Sayfa hazırlanıyor...
-    </p>
-
-  </div>
-
-</div>
-
-
-<script>
-
-function openPage(name){
-
-  document.getElementById("popupTitle").innerText = name;
-
-  document.getElementById("popupText").innerText =
-    name + " bölümü 1890 Dijital Merkez içerisinde açıldı.";
-
-  document.getElementById("overlay").style.display = "block";
-}
-
-function closePage(){
-
-  document.getElementById("overlay").style.display = "none";
-
-}
-
-function searchCards(){
-
-  let value =
-    document.getElementById("search").value.toLowerCase();
-
-  let cards =
-    document.querySelectorAll(".searchable");
-
-  cards.forEach(card=>{
-
-    let text =
-      card.innerText.toLowerCase();
-
-    if(text.includes(value)){
-      card.style.display="";
-    }else{
-      card.style.display="none";
-    }
-
-  });
-
-}
-
-function toggleMobile(){
-
-  alert("Mobil menü için sonraki sürümde özel açılır panel ekleyeceğiz.");
-
-}
-
-</script>
-
-</body>
-            </html>
+.sidebar-bottom strong{
+ 
